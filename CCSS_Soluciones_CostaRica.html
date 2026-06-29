@@ -1,0 +1,882 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>CCSS Soluciones – Red de Ayuda y Mejoras | Costa Rica 🇨🇷</title>
+  <style>
+    :root {
+      --azul: #002B7F;
+      --azul-medio: #003DA5;
+      --azul-claro: #e8f1fb;
+      --verde: #00897b;
+      --verde-claro: #e0f2f1;
+      --rojo: #CE1126;
+      --rojo-claro: #fff0f0;
+      --naranja: #e65100;
+      --naranja-claro: #fff3e0;
+      --gris: #f4f6f9;
+      --texto: #1a1a2e;
+      --blanco: #ffffff;
+      --sombra: 0 4px 24px rgba(10,61,124,0.10);
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Segoe UI', Arial, sans-serif;
+      color: var(--texto);
+      background: var(--gris);
+      min-height: 100vh;
+    }
+
+    /* ── NAVBAR ── */
+    nav {
+      background: var(--azul);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.18);
+    }
+    .nav-inner {
+      max-width: 1200px;
+      margin: auto;
+      padding: 0 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 64px;
+      flex-wrap: wrap;
+      gap: .5rem;
+    }
+    .nav-logo {
+      display: flex;
+      align-items: center;
+      gap: .7rem;
+      color: #fff;
+      text-decoration: none;
+    }
+    .nav-logo .shield {
+      width: 38px; height: 38px;
+      background: var(--verde);
+      border-radius: 50% 50% 50% 0;
+      transform: rotate(-45deg);
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+    }
+    .nav-logo .shield span {
+      transform: rotate(45deg);
+      font-size: 1.2rem; color: #fff; font-weight: 900;
+    }
+    .nav-logo strong { font-size: 1.05rem; line-height: 1.2; }
+    .nav-links {
+      display: flex; gap: .2rem; flex-wrap: wrap;
+    }
+    .nav-links a {
+      color: rgba(255,255,255,0.85);
+      text-decoration: none;
+      padding: .4rem .75rem;
+      border-radius: 6px;
+      font-size: .85rem;
+      transition: background .2s, color .2s;
+    }
+    .nav-links a:hover { background: rgba(255,255,255,0.15); color: #fff; }
+
+    /* ── HERO ── */
+    .hero {
+      background: linear-gradient(135deg, var(--azul) 0%, var(--azul-medio) 60%, #1a237e 100%);
+      color: #fff;
+      padding: 5rem 1.5rem 4rem;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.04'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+    }
+    .hero-badge {
+      display: inline-block;
+      background: rgba(255,255,255,0.15);
+      border: 1px solid rgba(255,255,255,0.3);
+      padding: .35rem 1rem;
+      border-radius: 20px;
+      font-size: .8rem;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      margin-bottom: 1.2rem;
+    }
+    .hero h1 {
+      font-size: clamp(1.8rem, 5vw, 3rem);
+      font-weight: 800;
+      max-width: 750px;
+      margin: 0 auto .8rem;
+      line-height: 1.15;
+    }
+    .hero h1 span { color: #80d8ff; }
+    .hero p {
+      font-size: 1.05rem;
+      max-width: 580px;
+      margin: 0 auto 2rem;
+      opacity: .88;
+      line-height: 1.6;
+    }
+    .hero-btns {
+      display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;
+    }
+    .btn {
+      display: inline-block;
+      padding: .75rem 2rem;
+      border-radius: 8px;
+      font-weight: 700;
+      font-size: .95rem;
+      text-decoration: none;
+      cursor: pointer;
+      border: none;
+      transition: transform .15s, box-shadow .15s, filter .15s;
+    }
+    .btn:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(0,0,0,0.2); }
+    .btn-blanco { background: #fff; color: var(--azul); }
+    .btn-contorno { background: transparent; border: 2px solid #fff; color: #fff; }
+    .btn-verde { background: var(--verde); color: #fff; }
+
+    /* ── STATS BAR ── */
+    .stats-bar {
+      background: var(--blanco);
+      box-shadow: var(--sombra);
+      padding: 1.5rem;
+    }
+    .stats-inner {
+      max-width: 1100px; margin: auto;
+      display: flex; justify-content: space-around; flex-wrap: wrap; gap: 1rem;
+    }
+    .stat-item { text-align: center; }
+    .stat-num {
+      font-size: 2rem; font-weight: 800;
+      color: var(--azul-medio); display: block;
+    }
+    .stat-label { font-size: .78rem; color: #666; text-transform: uppercase; letter-spacing: .06em; }
+
+    /* ── SECTION BASE ── */
+    section { padding: 4rem 1.5rem; }
+    .section-inner { max-width: 1100px; margin: auto; }
+    .section-title {
+      font-size: 1.65rem; font-weight: 800; color: var(--azul);
+      margin-bottom: .4rem;
+    }
+    .section-sub {
+      color: #555; font-size: .97rem; margin-bottom: 2.5rem; max-width: 620px;
+    }
+    .section-tag {
+      display: inline-block;
+      background: var(--azul-claro);
+      color: var(--azul);
+      font-size: .72rem;
+      font-weight: 700;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      padding: .25rem .75rem;
+      border-radius: 20px;
+      margin-bottom: .6rem;
+    }
+    .section-tag.verde { background: var(--verde-claro); color: var(--verde); }
+    .section-tag.rojo { background: var(--rojo-claro); color: var(--rojo); }
+    .section-tag.naranja { background: var(--naranja-claro); color: var(--naranja); }
+
+    /* ── GRID CARDS ── */
+    .grid-3 { display: grid; grid-template-columns: repeat(auto-fit, minmax(290px, 1fr)); gap: 1.4rem; }
+    .grid-2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 1.4rem; }
+
+    .card {
+      background: var(--blanco);
+      border-radius: 14px;
+      padding: 1.6rem;
+      box-shadow: var(--sombra);
+      transition: transform .2s, box-shadow .2s;
+    }
+    .card:hover { transform: translateY(-4px); box-shadow: 0 10px 32px rgba(10,61,124,0.14); }
+
+    .card-icon {
+      width: 52px; height: 52px;
+      border-radius: 12px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.55rem;
+      margin-bottom: 1rem;
+    }
+    .icon-azul { background: var(--azul-claro); }
+    .icon-verde { background: var(--verde-claro); }
+    .icon-rojo { background: var(--rojo-claro); }
+    .icon-naranja { background: var(--naranja-claro); }
+
+    .card h3 { font-size: 1.05rem; font-weight: 700; margin-bottom: .5rem; color: var(--azul); }
+    .card p { font-size: .88rem; color: #555; line-height: 1.6; }
+
+    /* ── PROBLEMAS ── */
+    #problemas { background: #fff; }
+    .problema-card {
+      border-left: 4px solid var(--rojo);
+      background: var(--rojo-claro);
+      border-radius: 0 10px 10px 0;
+      padding: 1.2rem 1.4rem;
+      margin-bottom: 1rem;
+    }
+    .problema-card h4 { color: var(--rojo); font-size: .95rem; font-weight: 700; margin-bottom: .3rem; }
+    .problema-card p { font-size: .85rem; color: #444; line-height: 1.5; }
+
+    /* ── SOLUCIONES ── */
+    #soluciones { background: var(--gris); }
+    .solucion-card {
+      border-left: 4px solid var(--verde);
+      background: var(--blanco);
+      border-radius: 0 10px 10px 0;
+      padding: 1.2rem 1.4rem;
+      box-shadow: var(--sombra);
+    }
+    .solucion-card h4 { color: var(--verde); font-size: .95rem; font-weight: 700; margin-bottom: .4rem; }
+    .solucion-card p { font-size: .85rem; color: #444; line-height: 1.55; }
+    .solucion-card .tag-pill {
+      display: inline-block; padding: .15rem .6rem;
+      border-radius: 20px; font-size: .7rem; font-weight: 700;
+      background: var(--verde-claro); color: var(--verde);
+      margin-bottom: .5rem;
+    }
+
+    /* ── RED DE AYUDA ── */
+    #red { background: linear-gradient(135deg, #e8f5e9, #e3f2fd); }
+    .red-card {
+      background: var(--blanco);
+      border-radius: 14px;
+      padding: 1.5rem;
+      box-shadow: var(--sombra);
+      display: flex; gap: 1rem; align-items: flex-start;
+    }
+    .red-icon {
+      font-size: 2rem; min-width: 48px;
+      width: 48px; height: 48px;
+      background: var(--azul-claro);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .red-card h4 { font-size: 1rem; font-weight: 700; color: var(--azul); margin-bottom: .3rem; }
+    .red-card p { font-size: .84rem; color: #555; line-height: 1.55; }
+    .red-card a { color: var(--azul-medio); font-weight: 600; font-size: .84rem; text-decoration: none; }
+    .red-card a:hover { text-decoration: underline; }
+
+    /* ── MEJORAS ── */
+    #mejoras { background: #fff; }
+    .mejora-step {
+      display: flex; gap: 1.2rem; align-items: flex-start;
+      background: var(--gris);
+      border-radius: 12px;
+      padding: 1.2rem;
+      margin-bottom: 1rem;
+    }
+    .step-num {
+      min-width: 42px; width: 42px; height: 42px;
+      background: var(--azul);
+      color: #fff;
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-weight: 800; font-size: 1.1rem;
+      flex-shrink: 0;
+    }
+    .step-num.verde { background: var(--verde); }
+    .step-num.naranja { background: var(--naranja); }
+    .mejora-step h4 { font-size: .97rem; font-weight: 700; color: var(--azul); margin-bottom: .3rem; }
+    .mejora-step p { font-size: .85rem; color: #555; line-height: 1.55; }
+
+    /* ── PROGRESO ── */
+    #progreso { background: var(--azul); color: #fff; }
+    #progreso .section-title { color: #fff; }
+    #progreso .section-sub { color: rgba(255,255,255,.75); }
+    .progress-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 1.4rem; }
+    .progress-card {
+      background: rgba(255,255,255,0.09);
+      border: 1px solid rgba(255,255,255,0.15);
+      border-radius: 14px;
+      padding: 1.4rem;
+    }
+    .progress-card h4 { font-size: .95rem; font-weight: 700; margin-bottom: .6rem; }
+    .progress-bar-wrap { background: rgba(255,255,255,0.15); border-radius: 10px; height: 10px; overflow: hidden; margin-bottom: .35rem; }
+    .progress-bar { height: 100%; border-radius: 10px; background: linear-gradient(90deg, #80d8ff, #00e5ff); transition: width 1.5s ease; }
+    .progress-pct { font-size: .78rem; opacity: .75; }
+
+    /* ── FORMULARIO ── */
+    #contacto { background: var(--gris); }
+    .form-wrap {
+      max-width: 640px;
+      background: var(--blanco);
+      border-radius: 16px;
+      padding: 2.2rem;
+      box-shadow: var(--sombra);
+      margin: 0 auto;
+    }
+    .form-wrap h3 { font-size: 1.2rem; color: var(--azul); margin-bottom: .4rem; }
+    .form-wrap p { font-size: .85rem; color: #666; margin-bottom: 1.5rem; }
+    .form-group { margin-bottom: 1.1rem; }
+    .form-group label { display: block; font-size: .83rem; font-weight: 600; color: #333; margin-bottom: .35rem; }
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+      width: 100%; padding: .65rem .9rem;
+      border: 1.5px solid #d0d7e3;
+      border-radius: 8px;
+      font-size: .9rem;
+      color: var(--texto);
+      outline: none;
+      transition: border .2s;
+      font-family: inherit;
+      background: #fafbfc;
+    }
+    .form-group input:focus,
+    .form-group select:focus,
+    .form-group textarea:focus { border-color: var(--azul-medio); background: #fff; }
+    .form-group textarea { resize: vertical; min-height: 100px; }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+    #form-success {
+      display: none;
+      background: var(--verde-claro);
+      border: 1.5px solid var(--verde);
+      color: var(--verde);
+      border-radius: 8px;
+      padding: 1rem;
+      text-align: center;
+      font-weight: 600;
+      margin-top: 1rem;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      background: #0a1628;
+      color: rgba(255,255,255,.65);
+      padding: 2.5rem 1.5rem;
+      text-align: center;
+    }
+    footer .footer-inner { max-width: 1100px; margin: auto; }
+    footer strong { color: #fff; }
+    footer .footer-links { display: flex; gap: 1.5rem; justify-content: center; margin: 1rem 0; flex-wrap: wrap; }
+    footer .footer-links a { color: rgba(255,255,255,.55); text-decoration: none; font-size: .83rem; }
+    footer .footer-links a:hover { color: #fff; }
+    .footer-divider { border: none; border-top: 1px solid rgba(255,255,255,.1); margin: 1.2rem 0; }
+
+    /* ── ACCORDION ── */
+    .accordion { border-radius: 10px; overflow: hidden; box-shadow: var(--sombra); }
+    .accordion-item { border-top: 1px solid #e8ecf2; }
+    .accordion-item:first-child { border-top: none; }
+    .accordion-btn {
+      width: 100%;
+      background: var(--blanco);
+      border: none;
+      padding: 1.1rem 1.4rem;
+      text-align: left;
+      font-size: .92rem;
+      font-weight: 700;
+      color: var(--azul);
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      transition: background .2s;
+    }
+    .accordion-btn:hover { background: var(--azul-claro); }
+    .accordion-btn .arr { transition: transform .3s; font-size: 1.1rem; }
+    .accordion-btn.active .arr { transform: rotate(180deg); }
+    .accordion-body {
+      max-height: 0;
+      overflow: hidden;
+      background: #fafbfe;
+      transition: max-height .35s ease, padding .3s;
+      font-size: .87rem;
+      color: #444;
+      line-height: 1.65;
+    }
+    .accordion-body.open {
+      max-height: 300px;
+      padding: 1rem 1.4rem 1.2rem;
+    }
+
+
+    /* ── CR FLAG BANNER ── */
+    .cr-banner {
+      background: linear-gradient(to bottom, #002B7F 20%, #fff 20% 40%, #CE1126 40% 60%, #fff 60% 80%, #002B7F 80%);
+      height: 8px;
+      width: 100%;
+    }
+    /* ── CR FLAG INLINE ── */
+    .flag-cr {
+      display: inline-flex;
+      flex-direction: column;
+      width: 30px; height: 20px;
+      border-radius: 3px;
+      overflow: hidden;
+      flex-shrink: 0;
+      border: 1px solid rgba(255,255,255,0.3);
+    }
+    .flag-cr .f1 { flex: 1; background: #002B7F; }
+    .flag-cr .f2 { flex: 1; background: #fff; }
+    .flag-cr .f3 { flex: 2; background: #CE1126; }
+    .flag-cr .f4 { flex: 1; background: #fff; }
+    .flag-cr .f5 { flex: 1; background: #002B7F; }
+    /* ── ADDRESS BLOCK ── */
+    .address-block {
+      background: rgba(255,255,255,0.10);
+      border: 1px solid rgba(255,255,255,0.2);
+      border-radius: 10px;
+      padding: .6rem 1.2rem;
+      display: inline-flex;
+      align-items: center;
+      gap: .6rem;
+      font-size: .82rem;
+      color: rgba(255,255,255,.85);
+      margin-top: 1.5rem;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+    .address-block strong { color: #fff; }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 600px) {
+      .form-row { grid-template-columns: 1fr; }
+      .hero { padding: 3.5rem 1rem 3rem; }
+      .nav-links { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="cr-banner"></div>
+
+<!-- ══ NAVBAR ══ -->
+<nav>
+  <div class="nav-inner">
+    <a href="#inicio" class="nav-logo">
+      <div class="shield"><span>+</span></div>
+      <div class="flag-cr"><div class="f1"></div><div class="f2"></div><div class="f3"></div><div class="f4"></div><div class="f5"></div></div>
+      <strong>CCSS Soluciones · Costa Rica</strong>
+    </a>
+    <div class="nav-links">
+      <a href="#problemas">Problemática</a>
+      <a href="#soluciones">Soluciones</a>
+      <a href="#red">Red de Ayuda</a>
+      <a href="#mejoras">Mejoras</a>
+      <a href="#faq">Preguntas</a>
+      <a href="#contacto">Contacto</a>
+    </div>
+  </div>
+</nav>
+
+<!-- ══ HERO ══ -->
+<section class="hero" id="inicio">
+  <div class="hero-badge">🇨🇷 Iniciativa Ciudadana · Costa Rica · CCSS</div>
+  <h1>Transformando la <span>Caja Costarricense de Seguro Social</span> para todos</h1>
+  <p>Identificamos los principales problemas de la CCSS en Costa Rica, proponemos soluciones concretas y construimos una red de apoyo para los asegurados y sus familias en todo el país.</p>
+  <div class="hero-btns">
+    <a href="#soluciones" class="btn btn-blanco">Ver Soluciones</a>
+    <a href="#red" class="btn btn-contorno">Red de Ayuda</a>
+  </div>
+  <div class="address-block">
+    <div class="flag-cr" style="width:22px;height:15px;"><div class="f1"></div><div class="f2"></div><div class="f3"></div><div class="f4"></div><div class="f5"></div></div>
+    <strong>CCSS – Sede Central:</strong> Av. 2, entre calles 5 y 7, San José, Costa Rica &nbsp;|&nbsp; ☎️ 2222-0166 &nbsp;|&nbsp; 🌐 www.ccss.sa.cr
+  </div>
+</section>
+
+<!-- ══ STATS ══ -->
+<div class="stats-bar">
+  <div class="stats-inner">
+    <div class="stat-item">
+      <span class="stat-num">+5M</span>
+      <span class="stat-label">Asegurados en Costa Rica</span>
+    </div>
+    <div class="stat-item">
+      <span class="stat-num">6</span>
+      <span class="stat-label">Áreas de mejora identificadas</span>
+    </div>
+    <div class="stat-item">
+      <span class="stat-num">12</span>
+      <span class="stat-label">Propuestas concretas</span>
+    </div>
+    <div class="stat-item">
+      <span class="stat-num">24/7</span>
+      <span class="stat-label">Red de ayuda disponible</span>
+    </div>
+  </div>
+</div>
+
+<!-- ══ PROBLEMÁTICA ══ -->
+<section id="problemas">
+  <div class="section-inner">
+    <div class="section-tag rojo">⚠️ Problemática</div>
+    <h2 class="section-title">Principales Problemas Identificados</h2>
+    <p class="section-sub">Estos son los desafíos más reportados por asegurados, trabajadores de la salud y organizaciones civiles.</p>
+
+    <div class="grid-2">
+      <div>
+        <div class="problema-card">
+          <h4>⏳ Mora en citas y cirugías</h4>
+          <p>Miles de pacientes esperan meses o años para obtener una cita con especialistas o someterse a procedimientos quirúrgicos básicos, poniendo en riesgo su salud.</p>
+        </div>
+        <div class="problema-card">
+          <h4>💊 Desabastecimiento de medicamentos</h4>
+          <p>Las farmacias de la CCSS frecuentemente carecen de medicamentos esenciales, obligando a los pacientes a comprarlos a sus propias expensas.</p>
+        </div>
+        <div class="problema-card">
+          <h4>📄 Exceso de burocracia y papeleo</h4>
+          <p>Los trámites siguen dependiendo del papel y procesos manuales, generando colas, errores y frustración en los asegurados.</p>
+        </div>
+      </div>
+      <div>
+        <div class="problema-card">
+          <h4>🏥 Infraestructura deteriorada</h4>
+          <p>Muchas instalaciones presentan mantenimiento deficiente, equipos obsoletos y espacios insuficientes para la demanda real de atención.</p>
+        </div>
+        <div class="problema-card">
+          <h4>👥 Desconexión del personal con su misión</h4>
+          <p>El personal de atención muestra desmotivación y falta de alineación con los valores de servicio, afectando la calidad de la atención al asegurado.</p>
+        </div>
+        <div class="problema-card">
+          <h4>💰 Ineficiencia financiera y falta de transparencia</h4>
+          <p>Los recursos no se distribuyen con criterios claros, la corrupción en compras y contrataciones erosiona la confianza ciudadana en la institución.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ SOLUCIONES ══ -->
+<section id="soluciones">
+  <div class="section-inner">
+    <div class="section-tag verde">✅ Soluciones</div>
+    <h2 class="section-title">Propuestas de Solución</h2>
+    <p class="section-sub">Soluciones basadas en buenas prácticas internacionales, tecnología y participación ciudadana activa.</p>
+
+    <div class="grid-3">
+
+      <div class="card">
+        <div class="card-icon icon-azul">🖥️</div>
+        <h3>Plataforma Digital Integrada</h3>
+        <p>Desarrollar un sistema unificado de citas en línea, historial médico electrónico y seguimiento de expedientes, eliminando el papel y reduciendo tiempos de espera hasta un 60%.</p>
+      </div>
+
+      <div class="card">
+        <div class="card-icon icon-verde">💊</div>
+        <h3>Gestión Inteligente de Medicamentos</h3>
+        <p>Implementar inventarios automatizados con alertas tempranas de desabastecimiento y licitaciones transparentes para garantizar el suministro oportuno de medicamentos esenciales.</p>
+      </div>
+
+      <div class="card">
+        <div class="card-icon icon-naranja">📊</div>
+        <h3>Transparencia y Auditoría Ciudadana</h3>
+        <p>Crear portales de datos abiertos con reportes financieros en tiempo real y comités ciudadanos de contraloría para supervisar la gestión de los recursos públicos.</p>
+      </div>
+
+      <div class="card">
+        <div class="card-icon icon-azul">🏥</div>
+        <h3>Rehabilitación de Infraestructura</h3>
+        <p>Priorizar la renovación de instalaciones existentes antes de construir nuevas, garantizando equipos funcionales y espacios dignos para pacientes y personal médico.</p>
+      </div>
+
+      <div class="card">
+        <div class="card-icon icon-verde">🎓</div>
+        <h3>Capacitación y Cultura de Servicio</h3>
+        <p>Programas continuos de formación en atención centrada en el paciente, evaluaciones de desempeño y sistemas de incentivos ligados a la satisfacción del asegurado.</p>
+      </div>
+
+      <div class="card">
+        <div class="card-icon icon-rojo">⚡</div>
+        <h3>Reducción de la Mora Quirúrgica</h3>
+        <p>Habilitar jornadas quirúrgicas sabatinas, alianzas con clínicas privadas y telemedicina para consultas de seguimiento, aliviando la saturación del sistema presencial.</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ══ RED DE AYUDA ══ -->
+<section id="red">
+  <div class="section-inner">
+    <div class="section-tag">🤝 Red de Ayuda</div>
+    <h2 class="section-title">Red de Apoyo al Asegurado</h2>
+    <p class="section-sub">Recursos, contactos y organizaciones que pueden ayudarte a navegar el sistema y hacer valer tus derechos.</p>
+
+    <div class="grid-2">
+
+      <div class="red-card">
+        <div class="red-icon">📞</div>
+        <div>
+          <h4>Línea de Orientación CCSS</h4>
+          <p>Consulta sobre tus derechos, estado de trámites y orientación general sobre servicios disponibles en tu región.<br><a href="#">Llamar al 2222-0166</a></p>
+        </div>
+      </div>
+
+      <div class="red-card">
+        <div class="red-icon">⚖️</div>
+        <div>
+          <h4>Defensoría de los Habitantes</h4>
+          <p>Presenta quejas formales ante la Defensoría de los Habitantes (institución oficial costarricense) si tus derechos como asegurado han sido vulnerados. Servicio gratuito y confidencial.<br><a href="#">Presentar queja</a></p>
+        </div>
+      </div>
+
+      <div class="red-card">
+        <div class="red-icon">🏘️</div>
+        <div>
+          <h4>Grupos de Pacientes Organizados</h4>
+          <p>Comunidades de pacientes con enfermedades crónicas que comparten experiencias, guías de trámites y apoyo emocional mutuo entre asegurados.<br><a href="#">Unirme a un grupo</a></p>
+        </div>
+      </div>
+
+      <div class="red-card">
+        <div class="red-icon">💻</div>
+        <div>
+          <h4>Asistencia Digital Gratuita</h4>
+          <p>Voluntarios capacitados te ayudan a hacer trámites en línea, descargar resultados y usar la aplicación de la CCSS si tienes dificultades tecnológicas.<br><a href="#">Solicitar ayuda</a></p>
+        </div>
+      </div>
+
+      <div class="red-card">
+        <div class="red-icon">🚑</div>
+        <div>
+          <h4>Traslados Médicos Comunitarios</h4>
+          <p>Red de voluntarios con vehículos que asisten a pacientes de zonas rurales o sin movilidad para llegar a sus citas y procedimientos médicos.<br><a href="#">Solicitar traslado</a></p>
+        </div>
+      </div>
+
+      <div class="red-card">
+        <div class="red-icon">🧑‍⚕️</div>
+        <div>
+          <h4>Telemedicina de Apoyo</h4>
+          <p>Consultas virtuales con médicos voluntarios para orientación, segunda opinión o apoyo mientras esperas tu cita en la CCSS.<br><a href="#">Agendar consulta virtual</a></p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ══ MEJORAS PASO A PASO ══ -->
+<section id="mejoras">
+  <div class="section-inner">
+    <div class="section-tag naranja">🔧 Plan de Mejoras</div>
+    <h2 class="section-title">Hoja de Ruta de Mejoras</h2>
+    <p class="section-sub">Un plan estructurado en tres horizontes de tiempo para transformar la CCSS de forma sostenible.</p>
+
+    <div class="grid-2">
+      <div>
+        <p style="font-size:.78rem;text-transform:uppercase;font-weight:800;color:#c62828;letter-spacing:.1em;margin-bottom:.8rem;">⚡ Corto Plazo (0–6 meses)</p>
+        <div class="mejora-step">
+          <div class="step-num" style="background:var(--rojo)">1</div>
+          <div><h4>Auditoría de inventarios de medicamentos</h4><p>Mapeo completo del estado actual de farmacias, identificación de brechas críticas y compras de emergencia para medicamentos esenciales.</p></div>
+        </div>
+        <div class="mejora-step">
+          <div class="step-num" style="background:var(--rojo)">2</div>
+          <div><h4>Habilitación de citas en línea</h4><p>Lanzar módulo básico de citas web y por WhatsApp para las especialidades con mayor mora, comenzando en las 5 Áreas de Salud con más demanda.</p></div>
+        </div>
+        <div class="mejora-step">
+          <div class="step-num" style="background:var(--rojo)">3</div>
+          <div><h4>Programa de jornadas quirúrgicas extras</h4><p>Organizar jornadas los sábados y domingos con cirujanos voluntarios y contratados para reducir la lista de espera quirúrgica urgente.</p></div>
+        </div>
+      </div>
+      <div>
+        <p style="font-size:.78rem;text-transform:uppercase;font-weight:800;color:var(--naranja);letter-spacing:.1em;margin-bottom:.8rem;">🔧 Mediano Plazo (6–18 meses)</p>
+        <div class="mejora-step">
+          <div class="step-num naranja">4</div>
+          <div><h4>Sistema de expediente médico electrónico</h4><p>Implementar historia clínica digital interoperable entre policlínicas y hospitales, eliminando la dependencia del papel y mejorando la continuidad del cuidado.</p></div>
+        </div>
+        <div class="mejora-step">
+          <div class="step-num naranja">5</div>
+          <div><h4>Renovación de infraestructura prioritaria</h4><p>Rehabilitar las 20 instalaciones con mayor déficit de mantenimiento, actualizando equipos de imagenología y laboratorio con mayor índice de fallas.</p></div>
+        </div>
+        <p style="font-size:.78rem;text-transform:uppercase;font-weight:800;color:var(--verde);letter-spacing:.1em;margin-top:1.2rem;margin-bottom:.8rem;">🌱 Largo Plazo (18+ meses)</p>
+        <div class="mejora-step">
+          <div class="step-num verde">6</div>
+          <div><h4>Reforma del modelo de gestión</h4><p>Implementar gestión por resultados con indicadores públicos, autonomía de gestión por hospital y participación ciudadana en juntas directivas locales.</p></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ PROGRESO ══ -->
+<section id="progreso">
+  <div class="section-inner">
+    <div class="section-tag" style="background:rgba(255,255,255,0.15);color:#80d8ff;">📈 Indicadores</div>
+    <h2 class="section-title">Estado de las Iniciativas</h2>
+    <p class="section-sub">Seguimiento ciudadano del avance en las áreas de mejora más críticas.</p>
+    <div class="progress-grid">
+      <div class="progress-card">
+        <h4>🖥️ Digitalización de citas</h4>
+        <div class="progress-bar-wrap"><div class="progress-bar" style="width:40%"></div></div>
+        <span class="progress-pct">40% — En implementación</span>
+      </div>
+      <div class="progress-card">
+        <h4>💊 Disponibilidad de medicamentos</h4>
+        <div class="progress-bar-wrap"><div class="progress-bar" style="width:55%"></div></div>
+        <span class="progress-pct">55% — Mejora parcial</span>
+      </div>
+      <div class="progress-card">
+        <h4>🏥 Rehabilitación infraestructura</h4>
+        <div class="progress-bar-wrap"><div class="progress-bar" style="width:25%"></div></div>
+        <span class="progress-pct">25% — Inicio de obras</span>
+      </div>
+      <div class="progress-card">
+        <h4>⚖️ Transparencia financiera</h4>
+        <div class="progress-bar-wrap"><div class="progress-bar" style="width:35%"></div></div>
+        <span class="progress-pct">35% — Portal en pruebas</span>
+      </div>
+      <div class="progress-card">
+        <h4>🎓 Capacitación del personal</h4>
+        <div class="progress-bar-wrap"><div class="progress-bar" style="width:60%"></div></div>
+        <span class="progress-pct">60% — Programa activo</span>
+      </div>
+      <div class="progress-card">
+        <h4>⚡ Reducción mora quirúrgica</h4>
+        <div class="progress-bar-wrap"><div class="progress-bar" style="width:30%"></div></div>
+        <span class="progress-pct">30% — Jornadas activas</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ FAQ ══ -->
+<section id="faq" style="background:#fff;">
+  <div class="section-inner">
+    <div class="section-tag">❓ Preguntas Frecuentes</div>
+    <h2 class="section-title">Lo Que Más Preguntan</h2>
+    <p class="section-sub">Respuestas claras a las dudas más comunes de los asegurados.</p>
+
+    <div class="accordion">
+      <div class="accordion-item">
+        <button class="accordion-btn" onclick="toggleAcc(this)">¿Cómo puedo solicitar mi cita médica sin hacer fila? <span class="arr">▼</span></button>
+        <div class="accordion-body">Actualmente la CCSS ofrece citas por teléfono al 2222-0166 y en algunos centros por su portal web. Nuestra red también cuenta con voluntarios que pueden ayudarte a agendar en línea si tienes dificultades. Recomendamos llamar temprano en la mañana o usar el formulario de contacto de esta página para recibir orientación personalizada.</div>
+      </div>
+      <div class="accordion-item">
+        <button class="accordion-btn" onclick="toggleAcc(this)">¿Qué hago si la farmacia de la CSS no tiene mi medicamento? <span class="arr">▼</span></button>
+        <div class="accordion-body">Primero solicita al farmacéutico que registre el faltante oficial. Si el medicamento es urgente, puedes reportarlo a la Defensoría de los Habitantes. Mientras tanto, algunos grupos de pacientes de nuestra red pueden orientarte sobre alternativas genéricas aprobadas. También puedes llenar nuestro formulario de reporte para escalar el caso ante las autoridades.</div>
+      </div>
+      <div class="accordion-item">
+        <button class="accordion-btn" onclick="toggleAcc(this)">¿Cómo puedo presentar una queja formal sobre mal servicio? <span class="arr">▼</span></button>
+        <div class="accordion-body">Puedes presentar tu queja directamente en la Dirección de Atención al Usuario de la CCSS, a través del portal de la Defensoría de los Habitantes de Costa Rica, o usando nuestro formulario de contacto en esta página. Guarda todos los documentos, fechas y nombres de los funcionarios involucrados para respaldar tu caso.</div>
+      </div>
+      <div class="accordion-item">
+        <button class="accordion-btn" onclick="toggleAcc(this)">¿Cómo puedo unirme como voluntario a la red de ayuda? <span class="arr">▼</span></button>
+        <div class="accordion-body">¡Gracias por querer ayudar! Llena el formulario de "Quiero ser voluntario" en la sección de contacto. Necesitamos personas con habilidades en salud, tecnología, transporte y orientación social. Te contactaremos para informarte sobre la próxima inducción de voluntarios en tu zona.</div>
+      </div>
+      <div class="accordion-item">
+        <button class="accordion-btn" onclick="toggleAcc(this)">¿Las propuestas de mejora son oficiales del gobierno? <span class="arr">▼</span></button>
+        <div class="accordion-body">Esta es una iniciativa ciudadana independiente. Las propuestas están basadas en análisis de expertos, experiencias de asegurados y buenas prácticas internacionales. Trabajamos para presentarlas ante las autoridades y legisladores y generar presión ciudadana positiva para su adopción oficial.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ FORMULARIO ══ -->
+<section id="contacto">
+  <div class="section-inner">
+    <div class="section-tag">✉️ Contacto & Reporte</div>
+    <h2 class="section-title">Reporta tu Caso o Únete</h2>
+    <p class="section-sub">Tu experiencia ayuda a construir datos reales para impulsar cambios. Cuéntanos lo que viviste.</p>
+
+    <div class="form-wrap">
+      <h3>📝 Formulario de Participación Ciudadana</h3>
+      <p>Reporta problemas, pide ayuda o regístrate como voluntario. Tu información es tratada con confidencialidad.</p>
+
+      <form id="mainForm" onsubmit="submitForm(event)">
+        <div class="form-row">
+          <div class="form-group">
+            <label>Nombre completo *</label>
+            <input type="text" placeholder="Tu nombre" required />
+          </div>
+          <div class="form-group">
+            <label>Teléfono / WhatsApp</label>
+            <input type="tel" placeholder="6000-0000" />
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Correo electrónico *</label>
+          <input type="email" placeholder="correo@ejemplo.com" required />
+        </div>
+        <div class="form-group">
+          <label>Tipo de participación *</label>
+          <select required>
+            <option value="">Selecciona una opción…</option>
+            <option>Reportar un problema en la CCSS</option>
+            <option>Solicitar ayuda de la red</option>
+            <option>Quiero ser voluntario</option>
+            <option>Proponer una mejora</option>
+            <option>Solicitar asesoría legal</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Región / Provincia</label>
+          <input type="text" placeholder="Ej: San José, Alajuela, Cartago, Heredia…" />
+        </div>
+        <div class="form-group">
+          <label>Describe tu situación o propuesta *</label>
+          <textarea placeholder="Cuéntanos con el mayor detalle posible…" required></textarea>
+        </div>
+        <button type="submit" class="btn btn-verde" style="width:100%;padding:.85rem;">Enviar mi reporte ➤</button>
+        <div id="form-success">✅ ¡Gracias! Tu reporte fue recibido. Nos pondremos en contacto contigo en las próximas 48 horas.</div>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- ══ FOOTER ══ -->
+<footer>
+  <div class="footer-inner">
+    <div style="display:flex;align-items:center;justify-content:center;gap:.8rem;flex-wrap:wrap;">
+      <div class="flag-cr" style="width:34px;height:22px;"><div class="f1"></div><div class="f2"></div><div class="f3"></div><div class="f4"></div><div class="f5"></div></div>
+      <strong>CCSS Soluciones – Red Ciudadana de Ayuda y Mejoras · Costa Rica</strong>
+    </div>
+    <p style="margin-top:.5rem;font-size:.8rem;color:rgba(255,255,255,.6);">
+      📍 Av. 2, entre calles 5 y 7, San José, Costa Rica &nbsp;·&nbsp; ☎️ 2222-0166 &nbsp;·&nbsp; 🌐 www.ccss.sa.cr
+    </p>
+    <p style="margin-top:.4rem;font-size:.82rem;">Iniciativa ciudadana independiente · No somos un organismo oficial de la CCSS · San José, Costa Rica 🇨🇷</p>
+    <div class="footer-links">
+      <a href="#inicio">Inicio</a>
+      <a href="#problemas">Problemática</a>
+      <a href="#soluciones">Soluciones</a>
+      <a href="#red">Red de Ayuda</a>
+      <a href="#mejoras">Mejoras</a>
+      <a href="#contacto">Contacto</a>
+    </div>
+    <hr class="footer-divider"/>
+    <p style="font-size:.78rem;">© 2026 CCSS Soluciones · Hecho con compromiso ciudadano costarricense 🇨🇷</p>
+  </div>
+</footer>
+
+<script>
+  // Accordion
+  function toggleAcc(btn) {
+    const body = btn.nextElementSibling;
+    const isOpen = body.classList.contains('open');
+    document.querySelectorAll('.accordion-body').forEach(b => b.classList.remove('open'));
+    document.querySelectorAll('.accordion-btn').forEach(b => b.classList.remove('active'));
+    if (!isOpen) { body.classList.add('open'); btn.classList.add('active'); }
+  }
+
+  // Form submit
+  function submitForm(e) {
+    e.preventDefault();
+    document.getElementById('form-success').style.display = 'block';
+    e.target.reset();
+    setTimeout(() => { document.getElementById('form-success').style.display = 'none'; }, 6000);
+  }
+
+  // Animate progress bars on scroll
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.querySelectorAll('.progress-bar').forEach(bar => {
+          bar.style.width = bar.style.width; // trigger transition
+        });
+      }
+    });
+  }, { threshold: 0.3 });
+  const progSection = document.getElementById('progreso');
+  if (progSection) observer.observe(progSection);
+</script>
+</body>
+</html>
